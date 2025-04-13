@@ -33,10 +33,10 @@ install_packages ()
 stage_apache ()
 {
     sudo service apache2 start;
-    sudo wget -q 'http://provisioning.aws.cs-labs.net/workshop/cwp/collection.sh' -O /var/www/html/collection.sh;
-    sudo wget -q 'http://provisioning.aws.cs-labs.net/workshop/cwp/defense_evasion.sh' -O /var/www/html/defense_evasion.sh;
-    sudo wget -q 'http://provisioning.aws.cs-labs.net/workshop/cwp/exfiltration.sh' -O /var/www/html/exfiltration.sh;
-    sudo wget -q 'http://provisioning.aws.cs-labs.net/workshop/cwp/mimipenguin.sh' -O /var/www/html/mimipenguin.sh;
+    sudo curl -o /var/www/html/collection.sh https://raw.githubusercontent.com/ryanjpayne/cs-gcp-lab/refs/heads/main/collection.sh;
+    sudo curl -o /var/www/html/defense_evasion.sh https://raw.githubusercontent.com/ryanjpayne/cs-gcp-lab/refs/heads/main/defense_evasion.sh;
+    sudo curl -o /var/www/html/exfiltration.sh https://raw.githubusercontent.com/ryanjpayne/cs-gcp-lab/refs/heads/main/exfiltration.sh;
+    sudo curl -o /var/www/html/mimipenguin.sh https://raw.githubusercontent.com/ryanjpayne/cs-gcp-lab/refs/heads/main/mimipenguin.sh;
 }
 
 change_hostname ()
